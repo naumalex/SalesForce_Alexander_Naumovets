@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
     private final static By USER_ICON_LOCATOR = By.cssSelector(".photoContainer");
@@ -38,9 +37,7 @@ public class HomePage extends BasePage{
     }
 
     public String getAlertMessage() {
-        System.out.println(driver.findElement(ALERT_MESSAGE_LOCATOR).getText());
-        String alertText = driver.findElement(ALERT_MESSAGE_LOCATOR).getText();
-        return alertText;
+        return driver.findElement(ALERT_MESSAGE_LOCATOR).getText();
     }
 
     public void closeAlert() {
