@@ -24,11 +24,11 @@ public abstract class BasePage {
         wait = new WebDriverWait(driver, 60);
     }
 
-    abstract void waitForPageLoaded();
-    public void waitForPageLoaded(String caption) {
+    public abstract void waitForPageLoaded();
+  /*  public void waitForPageLoaded(String caption) {
         By locator = By.xpath(String.format(VIEW_CAPTION_LOCATOR, caption));
         waitForElementDisplayed(locator);
-    }
+    }*/
 
     public String getCurrentURL() {
         return driver.getCurrentUrl();
@@ -49,6 +49,9 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public void waitForAttributeToBe(By locator, String attribute, String value) {
+        wait.until(ExpectedConditions.attributeToBe(locator, attribute, value));
+    }
     public void waitForElementInvisible(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }

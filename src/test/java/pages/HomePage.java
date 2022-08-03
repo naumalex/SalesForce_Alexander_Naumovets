@@ -9,7 +9,6 @@ public class HomePage extends BasePage{
             By.cssSelector("button[title= 'Show Navigation Menu']");
     private final static String NAVIGATION_MENU_ITEM_LOCATOR = "a[data-label= '%s']";
     private final static String CLOSE_TAB_BUTTON_LOCATOR = "button[title= 'Close %s']";
-    private final static By ALERT_MESSAGE_LOCATOR = By.cssSelector("div[role='alertdialog']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -36,12 +35,5 @@ public class HomePage extends BasePage{
         driver.findElement(locator).click();
     }
 
-    public String getAlertMessage() {
-        return driver.findElement(ALERT_MESSAGE_LOCATOR).getText();
-    }
 
-    public void closeAlert() {
-        driver.findElement(ALERT_MESSAGE_LOCATOR).click();
-        waitForElementInvisible(ALERT_MESSAGE_LOCATOR);
-    }
 }
