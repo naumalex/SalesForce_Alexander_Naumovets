@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage {
@@ -59,15 +60,6 @@ public abstract class BasePage {
     public void jsClick(WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click()", element);
-    }
-    public void clickNewButton() {
-        driver.findElement(NEW_BUTTON).click();
-    }
-
-    public void waitForTabLoaded(String tabName) {
-        By tabTitleLocator = By.cssSelector(String.format(TAB_TITLE_LOCATOR, tabName));
-        waitForElementClickable(tabTitleLocator);
-        driver.findElement(tabTitleLocator).click();
     }
 
     public String getActiveTabTitle() {

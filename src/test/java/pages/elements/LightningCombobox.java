@@ -24,16 +24,18 @@ public class LightningCombobox extends BaseElement {
 
     private void expandListOfOptions() {
         By locator = By.xpath(String.format(COMBOBOX_BUTTON_LOCATOR, label));
-        WebElement comboboxButton = driver.findElement(locator);
+        WebElement button = driver.findElement(locator);
         System.out.printf("Click %s combobox to expand the list of options", label);
-        scrollIntoView(comboboxButton);
-        comboboxButton.click();
+        scrollIntoView(button);
+        button.click();
     }
 
     private void selectOption(String option) {
         By locator = By.xpath(String.format(COMBOBOX_ITEM_LOCATOR, label, option));
         System.out.printf("Select %s combobox option = %s", label, option);
-        driver.findElement(locator).click();
+        WebElement item = driver.findElement(locator);
+        scrollIntoView(item);
+        item.click();
     }
 
 }

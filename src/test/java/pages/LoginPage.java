@@ -3,7 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
     private final static String URL = "https://tmsqa193.lightning.force.com/";
     private final By userNameInput = By.cssSelector("input#username");
     private final By passwordInput = By.cssSelector("input#password");
@@ -24,6 +24,7 @@ public class LoginPage extends BasePage{
     }
 
     public void login(String userName, String password) {
+        waitForPageLoaded();
         setUserName(userName);
         setPassword(password);
         clickLoginButton();
@@ -40,6 +41,9 @@ public class LoginPage extends BasePage{
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
+
+
+
 /*
     public boolean isErrorMessageDisplayed() {
         return errorMessageContainer.isDisplayed();

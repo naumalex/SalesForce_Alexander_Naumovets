@@ -1,5 +1,7 @@
 package pages.enums;
 
+import java.util.Arrays;
+
 public enum Industry {
     NONE("--None--"), UNQUALIFIED("Agriculture"),
     APPAREL("Apparel"), BANKING("Banking"),
@@ -26,5 +28,15 @@ public enum Industry {
     }
     public String getName() {
         return this.name;
+    }
+
+    public static Industry fromString(String stringValue) {
+        if (stringValue == null) {
+            return null;
+        }
+            else {
+            return Arrays.stream(Industry.values())
+                    .filter(p -> p.name.equals(stringValue)).findFirst().get();
+        }
     }
 }

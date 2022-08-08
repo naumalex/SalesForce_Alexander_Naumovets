@@ -26,10 +26,15 @@ public class NewLeadModal extends BaseModal {
     }
 
     public void fillForm(Lead inputLead) {
-        new LightningCombobox(driver, "Lead Status").
-                selectByVisibleText(inputLead.getLeadStatus().getName());
-        new LightningCombobox(driver, "Salutation").
-                selectByVisibleText(inputLead.getSalutation().getName());
+
+        if (inputLead.getLeadStatus() != null) {
+            new LightningCombobox(driver, "Lead Status").
+                    selectByVisibleText(inputLead.getLeadStatus().getName());
+        }
+        if (inputLead.getSalutation() != null) {
+            new LightningCombobox(driver, "Salutation").
+                    selectByVisibleText(inputLead.getSalutation().getName());
+        }
         new LightningInput(driver, "First Name").setValue(inputLead.getFirstName());
         new LightningInput(driver, "Middle Name").setValue(inputLead.getMiddleName());
         new LightningInput(driver, "Last Name").setValue(inputLead.getLastName());
@@ -38,16 +43,23 @@ public class NewLeadModal extends BaseModal {
         new LightningInput(driver, "Title").setValue(inputLead.getTitle());
         new LightningInput(driver, "Company").setValue(inputLead.getCompany());
         new LightningInput(driver, "Email").setValue(inputLead.getEmail());
-        new LightningCombobox(driver, "Industry").
-                selectByVisibleText(inputLead.getIndustry().getName());
+
+        if (inputLead.getIndustry() != null) {
+            new LightningCombobox(driver, "Industry").
+                    selectByVisibleText(inputLead.getIndustry().getName());
+        }
         new LightningInput(driver, "Phone").setValue(inputLead.getPhone());
         new LightningInput(driver, "No. of Employees").setValue(inputLead.getNoOfEmployees());
         new LightningInput(driver, "Mobile").setValue(inputLead.getMobile());
-        new LightningCombobox(driver, "Lead Source").
-                selectByVisibleText(inputLead.getLeadSource().getName());
-        new LightningCombobox(driver, "Rating").
-                selectByVisibleText(inputLead.getRating().getName());
-        //new LightningInput(driver, "").setValue(inputLead.getAddress());
+
+        if (inputLead.getLeadSource() != null) {
+            new LightningCombobox(driver, "Lead Source").
+                    selectByVisibleText(inputLead.getLeadSource().getName());
+        }
+        if (inputLead.getRating() != null) {
+            new LightningCombobox(driver, "Rating").
+                    selectByVisibleText(inputLead.getRating().getName());
+        }
         new LightningTextArea(driver, "Street").setValue(inputLead.getStreet());
         new LightningInput(driver, "City").setValue(inputLead.getCity());
         new LightningInput(driver, "State/Province").setValue(inputLead.getStateProvince());

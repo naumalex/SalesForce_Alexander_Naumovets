@@ -1,5 +1,7 @@
 package pages.enums;
 
+import java.util.Arrays;
+
 public enum LeadSource {
     NONE("--None--"), ADVERTISEMENT("Advertisement"),
     CUSTOMER_EVENT("Customer Event"), EMPLOYEE_REFERRAL("Employee Referral"),
@@ -7,7 +9,7 @@ public enum LeadSource {
     OTHER("Other"), PARTNER("Partner"), PURCHASED_LIST("Purchased List"),
     TRADE_SHOW("Trade Show"), WEBINAR("Webinar"), WEBSITE("Website");
 
-    private String name;
+    private final String name;
 
     LeadSource(String name) {
         this.name = name;
@@ -15,5 +17,15 @@ public enum LeadSource {
 
     public String getName() {
         return this.name;
+    }
+
+    public static LeadSource fromString(String stringValue) {
+        if (stringValue == null) {
+            return null;
+        }
+        else {
+            return Arrays.stream(LeadSource.values())
+                    .filter(p -> p.name.equals(stringValue)).findFirst().get();
+        }
     }
 }

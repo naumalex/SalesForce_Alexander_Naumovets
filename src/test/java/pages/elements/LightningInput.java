@@ -14,6 +14,8 @@ public class LightningInput extends BaseElement{
     }
 
     public void setValue(String value) {
+        if (value == null)
+            return;
         WebElement inputElement = driver.findElement(
                 By.xpath(String.format(INPUT_LOCATOR, label)));
         System.out.printf("Setting %s input value = %s", label, value);

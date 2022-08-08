@@ -9,7 +9,9 @@ public class HomePage extends BasePage{
             By.cssSelector("button[title= 'Show Navigation Menu']");
     private final static String NAVIGATION_MENU_ITEM_LOCATOR = "a[data-label= '%s']";
     private final static String CLOSE_TAB_BUTTON_LOCATOR = "button[title= 'Close %s']";
-
+    private final static String LOGOUT_LINK_LOCATOR =
+          //  By.cssSelector("*[class~='userProfilePanel'] a[class~='logout']");
+    "//*[contains(@class, 'userProfilePanel')]//a[text() = '%s']";
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -17,10 +19,6 @@ public class HomePage extends BasePage{
     @Override
     public void waitForPageLoaded() {
         waitForElementDisplayed(USER_ICON_LOCATOR);
-    }
-
-    public void openLeadsTab() {
-        openTabByName("Leads");
     }
 
     public void openTabByName(String tabName) {
@@ -35,5 +33,26 @@ public class HomePage extends BasePage{
         driver.findElement(locator).click();
     }
 
+    public void waitForTabLoaded(String tabName) {
+        By tabTitleLocator = By.cssSelector(String.format(TAB_TITLE_LOCATOR, tabName));
+        waitForElementClickable(tabTitleLocator);
+        driver.findElement(tabTitleLocator).click();
+    }
+    public void logout() {
+        openUserMenu();
+        clickLinkInUserMenu("Log Out");
+    }
+    private void openUserMenu() {
+        waitForElementClickable(USER_ICON_LOCATOR);
+        driver.findElement(USER_ICON_LOCATOR).click();
+        waitForElementClickable(By.xpath(String.format(LOGOUT_LINK_LOCATOR,
+                "Add Username")));
+    }
+
+    private void clickLinkInUserMenu(String linkText) {
+        By locator = By.xpath(String.format(LOGOUT_LINK_LOCATOR, linkText));
+        waitForElementClickable(locator);
+        driver.findElement(locator).click();
+    }
 
 }

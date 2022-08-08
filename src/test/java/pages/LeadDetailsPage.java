@@ -2,29 +2,29 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.elements.LightningCombobox;
-import pages.elements.LightningFormattedAddressElement;
+import pages.elements.LightningFormattedLinkElement;
 import pages.elements.LightningFormattedElement;
-import pages.elements.LightningInput;
 import pages.enums.*;
 import pages.models.Lead;
 
-public class LeadDetailsPage extends BasePage {
+public class LeadDetailsPage extends HomePage {
 
-    private static final String TAB_LOCATOR = ".slds-tabs_default__item a[data-label='%s']";
+    private static final String SLDS_TAB_LOCATOR =
+            "//div[contains(@class, 'windowViewMode') and contains(@class, 'active')]//*[@class = 'slds-tabs_default__item']//a[@data-label='%s']";
     public LeadDetailsPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public void waitForPageLoaded() {
-
+        new LightningFormattedElement(driver, "Name").waitUntilDisplayed();
     }
 
-    public void openTabByName(String tabName) {
-        By tabLocator = By.cssSelector(String.format(TAB_LOCATOR, tabName));
+    public void openSldsTabByName(String tabName) {
+        By tabLocator = By.xpath(String.format(SLDS_TAB_LOCATOR, tabName));
+        waitForElementClickable(tabLocator);
         driver.findElement(tabLocator).click();
-        waitForAttributeToBe(tabLocator, "aria-selected", "true");
+        //waitForAttributeToBe(tabLocator, "aria-selected", "true");
     }
 
     public Lead getLeadInfo() {
@@ -40,9 +40,18 @@ public class LeadDetailsPage extends BasePage {
         String mobile = new LightningFormattedElement(driver, "Mobile").getText();
         String leadSource = new LightningFormattedElement(driver, "Lead Source").getText();
         String rating = new LightningFormattedElement(driver, "Rating").getText();
-        String fullAddress = new LightningFormattedAddressElement(driver, "Address").getText();
-        return new Lead(LeadStatus.valueOf(leadStatus), fullName, website, title, company, email,
-                Industry.valueOf(industry), phone, noOfEmployees, mobile, LeadSource.valueOf(leadSource),
-                Rating.valueOf(rating), fullAddress);
+        String fullAddress = new LightningFormattedLinkElement(driver, "Address").getText();
+        return new Lead.LeadBuilder(LeadStatus.fromString(leadStatus), company, fullName)
+                .setWebsite(website)
+                .setTitle(title)
+                .setEmail(email)
+                .setIndustry(Industry.fromString(industry))
+                .setPhone(phone)
+                .setNoOfEmployees(noOfEmployees)
+                .setMobile(mobile)
+                .setLeadSource(LeadSource.fromString(leadSource))
+                .setRating(Rating.fromString(rating))
+                .setFullAddress(fullAddress)
+                .build();
     }
 }

@@ -13,6 +13,8 @@ public class LightningTextArea extends BaseElement {
     }
 
     public void setValue(String value) {
+        if (value == null)
+            return;
         WebElement inputElement = driver.findElement(
                 By.xpath(String.format(TEXT_AREA_LOCATOR, label)));
         System.out.printf("Setting %s text area value = %s\n", label, value);

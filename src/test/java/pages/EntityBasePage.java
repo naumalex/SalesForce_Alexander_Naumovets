@@ -6,14 +6,14 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public abstract class EntityBasePage extends BasePage {
+public abstract class EntityBasePage extends HomePage {
 
     protected final static By NEW_BUTTON = By.cssSelector("div.active a[title='New']");
     private static final By TABLE_LOCATOR = By.cssSelector("table[role='grid']");
     private static final By ENTITY_LINKS_LOCATOR =
             By.cssSelector("table[role='grid'] a[data-refid='recordId']");
     private final static By ALERT_MESSAGE_LOCATOR = By.cssSelector("div[role='alertdialog']");
-
+    private final static String CLOSE_TAB_BUTTON_LOCATOR = "button[title= 'Close %s']";
 
     public EntityBasePage(WebDriver driver) {
         super(driver);
@@ -23,6 +23,10 @@ public abstract class EntityBasePage extends BasePage {
     public void waitForPageLoaded() {
         waitForElementDisplayed(NEW_BUTTON);
         waitForElementClickable(NEW_BUTTON);
+    }
+
+    public void clickNewButton() {
+        driver.findElement(NEW_BUTTON).click();
     }
 
     public void openEntityByName(String entityName) {
@@ -36,6 +40,7 @@ public abstract class EntityBasePage extends BasePage {
     }
 
     public String getAlertMessage() {
+        waitForElementDisplayed(ALERT_MESSAGE_LOCATOR);
         return driver.findElement(ALERT_MESSAGE_LOCATOR).getText();
     }
 
@@ -43,5 +48,4 @@ public abstract class EntityBasePage extends BasePage {
         driver.findElement(ALERT_MESSAGE_LOCATOR).click();
         waitForElementInvisible(ALERT_MESSAGE_LOCATOR);
     }
-
 }

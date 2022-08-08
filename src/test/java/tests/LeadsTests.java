@@ -1,14 +1,18 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Test;
 import pages.LeadDetailsPage;
 import pages.LeadsPage;
+import pages.Utils;
+import pages.dataproviders.LeadDataProvider;
 import pages.enums.*;
 import pages.modals.NewLeadModal;
 import pages.models.Lead;
-
+import static java.util.Optional.ofNullable;
 public class LeadsTests extends BaseTest {
 
     private final String LEAD_STATUS = "Working";
@@ -25,33 +29,34 @@ public class LeadsTests extends BaseTest {
         leadDetailsPage = new LeadDetailsPage(driver);
     }
 
-    @Test
-    public void createLeadTest()  {
+    @AfterMethod(alwaysRun = true)
+    public void logout() {
+        leadDetailsPage.logout();
+        loginPage.waitForPageLoaded();
+    }
+
+    @Test(dataProvider = "leadDataProvider", dataProviderClass = LeadDataProvider.class)
+    public void createLeadTest(Lead testLead)  {
         loginPage.login(DEFAULT_USER_NAME, DEFAULT_PASSWORD);
         homePage.waitForPageLoaded();
-        homePage.openLeadsTab();
+        homePage.openTabByName("Leads");
         leadsPage.waitForPageLoaded();
         leadsPage.clickNewButton();
-        Lead testLead = new Lead(LeadStatus.WORKING,Salutation.MR,"Alex",
-                "Jenny", "Johnson", "Junior", "www.onliner.by",
-                "Title", "Apple", "test@gmail.com", Industry.COMMUNICATIONS,
-                "+375171234567", "5", "+375291111111",
-                LeadSource.GOOGLE_ADWORDS, Rating.COLD, "Address", "Nezavisimosty",
-                "Minsk", "TEST", "210009", "Belarus");
-
-        newLeadPage.waitForPageLoaded();
-        //String itemDescription =
+        leadsPage.waitForTabLoaded("New Lead" );
         newLeadPage.fillForm(testLead);
         newLeadPage.clickSave();
         String actualAlertMessage = leadsPage.getAlertMessage();
         leadsPage.closeAlert();
-        String expectedAlertMessage = String.format("success\nLead \"%s %s\" was created.\nClose",
-                SALUTATION, LAST_NAME);
+        String expectedAlertMessage = String.format("success\nLead \"%s\" was created.\nClose",
+                testLead.getFullName());
         Assert.assertEquals(actualAlertMessage, expectedAlertMessage, "Alert text about successful " +
                 "lead creating is incorrect");
-        leadDetailsPage.openTabByName("Details"); //old version of site. Details are not shown
-        Assert.assertEquals(testLead, leadDetailsPage.getLeadInfo(), "Safed data is different from " +
+        leadDetailsPage.openSldsTabByName("Details"); //old version of site. Details are not shown
+        leadDetailsPage.waitForPageLoaded();
+        Assert.assertEquals(testLead, leadDetailsPage.getLeadInfo(), "Saved data is different from " +
                 "the entered ones");
-        //homePage.closeTabByName(itemDescription);
+        leadDetailsPage.closeTabByName(new Utils().buildFullName(null,
+                testLead.getFirstName(), testLead.getMiddleName(), testLead.getLastName(),
+                testLead.getSuffix()));
     }
 }
