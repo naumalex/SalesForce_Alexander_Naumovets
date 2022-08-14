@@ -6,7 +6,8 @@ import pages.BasePage;
 
 public abstract class BaseModal extends BasePage {
 
-    protected static final By SAVE_BUTTON_LOCATOR = By.xpath("//button[@name='SaveEdit']");
+    protected static final By SAVE_BUTTON_LOCATOR =
+            By.xpath("//button[@name='SaveEdit' or @title='Save']");
 
     public BaseModal(WebDriver driver) {
         super(driver);

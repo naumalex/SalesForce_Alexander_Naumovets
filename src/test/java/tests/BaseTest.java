@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public class BaseTest {
-    protected final static String DEFAULT_USER_NAME = "naum_1979_alex-1ne0@force.com";
+   // protected final static String DEFAULT_USER_NAME = "naum_1979_alex-1ne0@force.com";
+    protected final static String DEFAULT_USER_NAME = "naum1979alex-8hvs@force.com";
     protected final static String DEFAULT_PASSWORD = "Password1*";
 
     protected WebDriver driver;
@@ -24,7 +25,7 @@ public class BaseTest {
     public void setUp(ITestContext testContext) throws Exception {
         String browserName = System.getProperty("browser", "chrome");
         driver = DriverFactory.getDriver(browserName);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         testContext.setAttribute("driver", driver);
         loginPage = new LoginPage(driver);
@@ -37,7 +38,9 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void ClearCookies() {
+    public void logOutAndClearCookies() {
+        homePage.logout();
+        loginPage.waitForPageLoaded();
         driver.manage().deleteAllCookies();
         ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
         ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));

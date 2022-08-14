@@ -1,6 +1,7 @@
 package pages.enums;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum LeadStatus {
     NONE("--None--"), UNQUALIFIED("Unqualified"), NEW("New"),
@@ -19,9 +20,7 @@ public enum LeadStatus {
         if (stringValue == null) {
             return null;
         }
-        else {
-            return Arrays.stream(LeadStatus.values())
-                    .filter(p -> p.name.equals(stringValue)).findFirst().get();
-        }
+        return Arrays.stream(LeadStatus.values())
+                .filter(p -> p.name.equals(stringValue)).findFirst().orElse(null);
     }
 }

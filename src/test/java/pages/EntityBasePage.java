@@ -1,11 +1,13 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+@Log4j2
 public abstract class EntityBasePage extends HomePage {
 
     protected final static By NEW_BUTTON = By.cssSelector("div.active a[title='New']");
@@ -47,5 +49,6 @@ public abstract class EntityBasePage extends HomePage {
     public void closeAlert() {
         driver.findElement(ALERT_MESSAGE_LOCATOR).click();
         waitForElementInvisible(ALERT_MESSAGE_LOCATOR);
+        log.info("Alert invisible");
     }
 }

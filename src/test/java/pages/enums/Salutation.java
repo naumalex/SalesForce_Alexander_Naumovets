@@ -1,6 +1,7 @@
 package pages.enums;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Salutation {
     MR("Mr."), MS("Ms."), MRS("Mrs."), DR("Dr."), PROF("Prof.");
@@ -16,9 +17,7 @@ public enum Salutation {
         if (stringValue == null) {
             return null;
         }
-        else {
-            return Arrays.stream(Salutation.values())
-                    .filter(p -> p.name.equals(stringValue)).findFirst().get();
-        }
+        return Arrays.stream(Salutation.values())
+                .filter(p -> p.name.equals(stringValue)).findFirst().orElse(null);
     }
 }

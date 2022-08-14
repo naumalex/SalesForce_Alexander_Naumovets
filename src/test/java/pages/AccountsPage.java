@@ -3,7 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AccountsPage extends BasePage{
+public class AccountsPage extends EntityBasePage{
 
     private static final By TABLE_LOCATOR = By.cssSelector("table[role='grid']");
 
@@ -13,7 +13,7 @@ public class AccountsPage extends BasePage{
 
     @Override
     public void waitForPageLoaded() {
-        waitForPageLoaded("Accounts");
+      //  waitForPageLoaded("Accounts");
         waitForElementClickable(TABLE_LOCATOR);
     }
 }

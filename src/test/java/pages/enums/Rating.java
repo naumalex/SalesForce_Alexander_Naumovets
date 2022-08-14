@@ -1,6 +1,7 @@
 package pages.enums;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Rating {
     NONE("--None--"), HOT("Hot"), WARM("Warm"), COLD("Cold");
@@ -19,9 +20,7 @@ public enum Rating {
         if (stringValue == null) {
             return null;
         }
-        else {
-            return Arrays.stream(Rating.values())
-                    .filter(p -> p.name.equals(stringValue)).findFirst().get();
-        }
+        return Arrays.stream(Rating.values())
+                .filter(p -> p.name.equals(stringValue)).findFirst().orElse(null);
     }
 }

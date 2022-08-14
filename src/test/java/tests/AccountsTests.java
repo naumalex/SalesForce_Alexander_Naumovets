@@ -3,37 +3,42 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.AccountDetailsPage;
 import pages.AccountsPage;
-import pages.NewAccountPage;
+import pages.dataproviders.AccountDataProvider;
+import pages.modals.NewAccountModal;
+import pages.models.Account;
 
 public class AccountsTests extends BaseTest {
 
-    private final String ACCOUNT_NAME = "Account1";
     private AccountsPage accountsPage;
-    private NewAccountPage newAccountPage;
-
+    private NewAccountModal newAccountPage;
+    private AccountDetailsPage accountDetailsPage;
     @BeforeClass
     public void initialise() {
         accountsPage = new AccountsPage(driver);
-        newAccountPage = new NewAccountPage(driver);
+        newAccountPage = new NewAccountModal(driver);
+        accountDetailsPage = new AccountDetailsPage(driver);
     }
 
-    @Test
-    public void createAccountTest()  {
+    @Test(dataProvider = "accountDataProvider", dataProviderClass = AccountDataProvider.class)
+    public void createAccountTest(Account testAccount)  {
         loginPage.login(DEFAULT_USER_NAME, DEFAULT_PASSWORD);
         homePage.waitForPageLoaded();
         homePage.openTabByName("Accounts");
         accountsPage.waitForPageLoaded();
         accountsPage.clickNewButton();
         newAccountPage.waitForPageLoaded();
-        String itemDescription =
-                newAccountPage.fillAndSaveNewAccountForm(ACCOUNT_NAME);
-        String actualAlertMessage = homePage.getAlertMessage();
-        homePage.closeAlert();
+        newAccountPage.fillForm(testAccount);
+        newAccountPage.clickSave();
+        String actualAlertMessage = accountsPage.getAlertMessage();
+        accountsPage.closeAlert();
         String expectedAlertMessage = String.format("success\nAccount \"%s\" was created.\nClose",
-                ACCOUNT_NAME);
+                testAccount.getAccountName());
         Assert.assertEquals(actualAlertMessage, expectedAlertMessage, "Alert text about successful " +
                 "account creating is incorrect");
-        homePage.closeTabByName(itemDescription);
+        accountDetailsPage.waitForPageLoaded();
+        Assert.assertEquals(accountDetailsPage.getAccountInfo(), testAccount ,
+                "Saved data is different from the entered ones");
     }
 }

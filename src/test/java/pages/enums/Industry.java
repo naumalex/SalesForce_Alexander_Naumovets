@@ -1,6 +1,7 @@
 package pages.enums;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Industry {
     NONE("--None--"), UNQUALIFIED("Agriculture"),
@@ -21,7 +22,7 @@ public enum Industry {
     TELECOMMUNICATIONS("Telecommunications"), TRANSPORTATION("Transportation"),
     UTILITIES("Utilities");
 
-    private String name;
+    private final String name;
 
     Industry(String name) {
         this.name = name;
@@ -34,9 +35,7 @@ public enum Industry {
         if (stringValue == null) {
             return null;
         }
-            else {
-            return Arrays.stream(Industry.values())
-                    .filter(p -> p.name.equals(stringValue)).findFirst().get();
-        }
+        return Arrays.stream(Industry.values())
+                .filter(p -> p.name.equals(stringValue)).findFirst().orElse(null);
     }
 }

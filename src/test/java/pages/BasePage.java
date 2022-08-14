@@ -22,7 +22,7 @@ public abstract class BasePage {
     protected WebDriverWait wait;
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 120);
     }
 
     public abstract void waitForPageLoaded();
@@ -46,17 +46,15 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public void waitForElementClickable(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
     public void waitForAttributeToBe(By locator, String attribute, String value) {
         wait.until(ExpectedConditions.attributeToBe(locator, attribute, value));
     }
     public void waitForElementInvisible(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
-
+    public void waitForElementClickable(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
     public void jsClick(WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click()", element);
