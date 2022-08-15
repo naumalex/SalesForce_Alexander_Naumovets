@@ -24,12 +24,12 @@ public class AccountFactory {
                 .setAccountName(faker.name().username())
                 .setPhone(faker.phoneNumber().phoneNumber())
                 .setFax(faker.phoneNumber().phoneNumber())
-                .setParentAccount("a")
+                .setParentAccount("romaine.cole")
                 .setWebsite(faker.internet().url())
                 .setAccountType(AccountType.INVESTOR)
-                .setEmployees(faker.numerify("###"))
+                .setEmployees(faker.numerify("1##"))
                 .setIndustry(Industry.APPAREL)
-                .setAnnualRevenue(faker.numerify("#######"))
+                .setAnnualRevenue(faker.numerify("$1,###,###"))
                 .setDescription(faker.backToTheFuture().quote())
                 .setBillingAddress(new Address(faker.address().streetAddress(),
                         faker.address().city(), faker.address().state(),

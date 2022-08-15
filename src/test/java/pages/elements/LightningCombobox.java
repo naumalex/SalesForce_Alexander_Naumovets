@@ -2,6 +2,7 @@ package pages.elements;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +13,7 @@ public class LightningCombobox extends BaseElement {
 
     private static final String COMBOBOX_BUTTON_LOCATOR =
             "//label[text() = '%1$s']/following-sibling::div//button" +
-                    "| //span[text() = '%1$s']/parent::span/following-sibling::div//a";
+                    "| //span[text() = '%1$s']/parent::span/following-sibling::div";
 
     private static final String COMBOBOX_ITEM_LOCATOR =
             "//label[text() = '%s']/following-sibling::div//" +
@@ -34,7 +35,11 @@ public class LightningCombobox extends BaseElement {
         WebElement button = driver.findElement(locator);
         System.out.printf("Click %s combobox to expand the list of options", label);
         scrollIntoView(button);
-        button.click();
+        try {
+            button.click();
+        }
+        catch(ElementClickInterceptedException exception) {
+        }
     }
 
     private void selectOption(String option) {

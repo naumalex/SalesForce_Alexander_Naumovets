@@ -22,8 +22,8 @@ public class Account {
     private Industry industry;
     private String AnnualRevenue;
     private String description;
-    private String fullBillingAddress;
-    private String fullShippingAddress;
+   // private String fullBillingAddress;
+   // private String fullShippingAddress;
     private boolean isCopyBillingAddressToShippingAddress;
     private Address billingAddress;
     private Address shippingAddress;

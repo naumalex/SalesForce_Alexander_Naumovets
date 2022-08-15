@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import pages.Utils.Address;
 import pages.elements.LightningCheckbox;
 import pages.elements.LightningFormattedElement;
 import pages.elements.LightningFormattedLinkElement;
@@ -49,8 +50,8 @@ public class AccountDetailsPage extends HomePage{
                 .setIndustry(Industry.fromString(industry))
                 .setAnnualRevenue(annualRevenue)
                 .setDescription(description)
-                .setFullBillingAddress(fullBillingAddress)
-                .setFullShippingAddress(fullShippingAddress)
+                .setBillingAddress(new Address(fullBillingAddress))
+                .setShippingAddress(new Address(fullShippingAddress))
                 .setIsCopyBillingAddressToShippingAddress(isCopyBillingAddressToShippingAddress)
                 .build();
     }

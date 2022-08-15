@@ -8,7 +8,7 @@ public class Address {
     private String stateProvince;
     private String zipPostalCode;
     private String country;
-
+    private String fullAddress;
     public String getStreet() {
         return street;
     }
@@ -38,7 +38,14 @@ public class Address {
         this.country = country;
     }
 
+    public Address(String fullAddress) {
+        this.fullAddress = fullAddress;
+    }
+
     public String getFullAddress() {
+        return (fullAddress != null) ? fullAddress : buildFullAddress();
+    }
+    private String buildFullAddress() {
         final StringBuilder fullAddress = new StringBuilder();
         Optional.ofNullable(street).ifPresent(fullAddress::append);
         Optional.ofNullable(city).ifPresent(s -> fullAddress.append("\n").append(s));
