@@ -1,10 +1,10 @@
-package pages.models;
+package models;
 
+import enums.AccountType;
+import enums.Industry;
 import lombok.Builder;
 import lombok.Data;
-import pages.Utils.Address;
-
-import pages.enums.*;
+import Utils.Address;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -22,8 +22,6 @@ public class Account {
     private Industry industry;
     private String AnnualRevenue;
     private String description;
-   // private String fullBillingAddress;
-   // private String fullShippingAddress;
     private boolean isCopyBillingAddressToShippingAddress;
     private Address billingAddress;
     private Address shippingAddress;
