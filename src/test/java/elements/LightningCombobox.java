@@ -1,12 +1,9 @@
-package pages.elements;
+package elements;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.Optional;
 
 @Log4j2
 public class LightningCombobox extends BaseElement {
@@ -25,9 +22,11 @@ public class LightningCombobox extends BaseElement {
     }
 
     public void selectByVisibleText(String visibleText) {
+        if (visibleText == null)
+            return;
         log.info(String.format("select %s in %s combobox", visibleText, label));
         expandListOfOptions();
-        Optional.ofNullable(visibleText).ifPresent(this::selectOption);
+        selectOption(visibleText);
     }
 
     private void expandListOfOptions() {
@@ -35,11 +34,8 @@ public class LightningCombobox extends BaseElement {
         WebElement button = driver.findElement(locator);
         System.out.printf("Click %s combobox to expand the list of options", label);
         scrollIntoView(button);
-        try {
-            button.click();
-        }
-        catch(ElementClickInterceptedException exception) {
-        }
+        wait.waitForElementClickable(locator);
+        button.click();
     }
 
     private void selectOption(String option) {
