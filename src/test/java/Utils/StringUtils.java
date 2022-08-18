@@ -1,8 +1,8 @@
-package pages.Utils;
+package Utils;
 
 import java.util.Optional;
 
-public class Utils {
+public class StringUtils {
     public static String buildFullAddress(String street, String city, String stateProvince,
             String zipPostalCode, String country) {
 
