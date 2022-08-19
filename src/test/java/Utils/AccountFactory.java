@@ -1,17 +1,12 @@
-package pages.Utils;
+package Utils;
 
 import com.github.javafaker.Faker;
-import pages.enums.*;
-import pages.models.Account;
-
-import java.util.Optional;
+import enums.AccountType;
+import enums.Industry;
+import models.Account;
 
 public class AccountFactory {
-    protected static Faker faker = new Faker();
-
-    public AccountFactory() {
-        //this.faker = new Faker();
-    }
+    private static final Faker faker = new Faker();
 
     public static Account getMandatoryInfoOnlyAccount() {
         return Account.builder()
@@ -46,10 +41,10 @@ public class AccountFactory {
                .setAccountName(faker.name().username())
                .setPhone(faker.phoneNumber().phoneNumber())
                .setFax(faker.phoneNumber().phoneNumber())
-               .setParentAccount("a")
+               .setParentAccount("romaine.cole")
                .setWebsite(faker.internet().url())
                .setAccountType(AccountType.INVESTOR)
-               .setEmployees(faker.numerify("###"))
+               .setEmployees(faker.numerify("1##"))
                .setIndustry(Industry.APPAREL)
                .build();
     }

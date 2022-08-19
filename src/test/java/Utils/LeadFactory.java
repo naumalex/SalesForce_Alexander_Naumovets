@@ -5,8 +5,8 @@ import enums.*;
 import models.Lead;
 
 public class LeadFactory {
+    private static final Faker faker = new Faker();
     public static Lead getMandatoryInfoOnlyLead() {
-        Faker faker = new Faker();
         return Lead.builder()
                 .setLastName(faker.name().lastName())
                 .setLeadStatus(LeadStatus.WORKING)
@@ -15,7 +15,6 @@ public class LeadFactory {
     }
 
     public static Lead getFullInfoLead() {
-        Faker faker = new Faker();
         return Lead.builder()
                 .setLastName(faker.name().lastName())
                 .setLeadStatus(LeadStatus.WORKING)
@@ -39,7 +38,6 @@ public class LeadFactory {
     }
 
     public static Lead getHalfInfoLead() {
-        Faker faker = new Faker();
         return Lead.builder()
                 .setLastName(faker.name().lastName())
                 .setLeadStatus(LeadStatus.WORKING)
