@@ -1,5 +1,6 @@
 package tests;
 
+import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -9,6 +10,7 @@ import dataproviders.LeadDataProvider;
 import modals.NewLeadModal;
 import models.Lead;
 
+@Log4j2
 public class LeadsTests extends BaseTest {
 
     private LeadsPage leadsPage;
@@ -23,12 +25,12 @@ public class LeadsTests extends BaseTest {
 
     @Test(dataProvider = "leadDataProvider", dataProviderClass = LeadDataProvider.class)
     public void createLeadTest(Lead testLead)  {
+        log.atDebug();
         loginPage.login(DEFAULT_USER_NAME, DEFAULT_PASSWORD);
         homePage.waitForPageLoaded();
         homePage.openTabByName("Leads");
         leadsPage.waitForPageLoaded();
         leadsPage.clickNewButton();
-        //leadsPage.waitForTabLoaded("New Lead" );
         newLeadPage.fillForm(testLead);
         newLeadPage.clickSave();
         String actualAlertMessage = leadsPage.getAlertMessage();

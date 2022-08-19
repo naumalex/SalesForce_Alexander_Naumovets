@@ -1,10 +1,11 @@
 package elements;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
+@Log4j2
 public class LightningTextArea extends BaseElement {
     private final static String TEXT_AREA_LOCATOR =
             "//label[text() = '%1$s']//following-sibling::div/textarea" + //for new lead window
@@ -20,8 +21,9 @@ public class LightningTextArea extends BaseElement {
         }
         WebElement inputElement = driver.findElement(
                 By.xpath(String.format(TEXT_AREA_LOCATOR, label)));
-        System.out.printf("Setting %s text area value = %s\n", label, value);
+        log.debug(String.format("Scroll to element %s",label));
         scrollIntoView(inputElement);
+        log.debug(String.format("Enter %s to text area %s", value, label));
         inputElement.sendKeys(value);
     }
 }

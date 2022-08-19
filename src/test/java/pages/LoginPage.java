@@ -6,7 +6,6 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class LoginPage extends BasePage {
-    //private final static String URL = "https://tmsqa193.lightning.force.com/";
     private final static String URL = "https://testih.my.salesforce.com/";
     private final By userNameInput = By.cssSelector("input#username");
     private final By passwordInput = By.cssSelector("input#password");

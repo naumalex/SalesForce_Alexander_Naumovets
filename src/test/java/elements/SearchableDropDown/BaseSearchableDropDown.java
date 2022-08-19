@@ -21,10 +21,7 @@ public abstract class BaseSearchableDropDown extends BaseElement {
     public List<WebElement> getItems() {
         By locator = By.xpath(String.format(getDropDownItemsXpathExpression(), label));
         wait.waitForListLoaded(locator);
-        //log.info(driver.findElements(locator).size());
-       // driver.findElements(locator).stream().map(WebElement::getText).forEach(log::info);
-       // driver.findElements(By.xpath(String.format(DROPDOWN_ITEMS_LOCATOR + "/parent::*", label))).stream().map(WebElement::getText).forEach(log::info);
-        return driver.findElements(locator);
+       return driver.findElements(locator);
     }
 
     public void setValue(String value) {
@@ -32,11 +29,19 @@ public abstract class BaseSearchableDropDown extends BaseElement {
             return;
         WebElement element = driver.findElement(By.xpath(String.format(
                 getDropDownElementXpathExpression(), label)));
+        log.debug(String.format("Scroll to element %s", label));
         scrollIntoView(element);
+        log.debug(String.format("Enter %s to %s element", value, label));
         element.sendKeys(value);
         List<WebElement> list = getItems();
         Optional<WebElement> options = list.stream()
                 .filter(p->p.getText().equals(value)).findFirst();
-        options.ifPresent(p -> { scrollIntoView(p); p.click();});
+        options.ifPresent(p -> {
+            log.debug(String.format("Scroll to the %s option", value));
+            scrollIntoView(p);
+            log.debug(String.format("Click the %s option", value));
+            p.click();
+        }
+        );
     }
 }

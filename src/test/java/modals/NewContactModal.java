@@ -8,15 +8,18 @@ import elements.LightningTextArea;
 import elements.SearchableDropDown.SearchableDropDownContact;
 import enums.LeadSource;
 import enums.Salutation;
+import lombok.extern.log4j.Log4j2;
 import models.Contact;
 import org.openqa.selenium.WebDriver;
 
+@Log4j2
 public class NewContactModal extends BaseModal {
     public NewContactModal(WebDriver driver) {
         super(driver);
     }
 
     public void fillForm(Contact inputContact) {
+        log.info("Fill Contact form");
         new LightningInput(driver, "Phone").setValue(inputContact.getPhone());
         new LightningInput(driver, "Mobile").setValue(inputContact.getMobile());
         new LightningCombobox(driver, "Salutation").selectByVisibleText(

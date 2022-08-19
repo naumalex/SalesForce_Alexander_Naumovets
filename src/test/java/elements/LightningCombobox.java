@@ -24,7 +24,6 @@ public class LightningCombobox extends BaseElement {
     public void selectByVisibleText(String visibleText) {
         if (visibleText == null)
             return;
-        log.info(String.format("select %s in %s combobox", visibleText, label));
         expandListOfOptions();
         selectOption(visibleText);
     }
@@ -32,19 +31,21 @@ public class LightningCombobox extends BaseElement {
     private void expandListOfOptions() {
         By locator = By.xpath(String.format(COMBOBOX_BUTTON_LOCATOR, label));
         WebElement button = driver.findElement(locator);
-        System.out.printf("Click %s combobox to expand the list of options", label);
+        log.debug(String.format("Scroll to combobox %s", label));
         scrollIntoView(button);
         wait.waitForElementClickable(locator);
+        log.debug(String.format(
+                "Click %s combobox to expand the list of options", label));
         button.click();
     }
 
     private void selectOption(String option) {
         By locator = By.xpath(String.format(COMBOBOX_ITEM_LOCATOR, label, option));
-        System.out.printf("Select %s combobox option = %s", label, option);
         WebElement item = driver.findElement(locator);
         scrollIntoView(item);
         wait.waitForElementClickable(locator);
+        log.debug(String.format(
+                "Click %s option", option));
         item.click();
     }
-
 }

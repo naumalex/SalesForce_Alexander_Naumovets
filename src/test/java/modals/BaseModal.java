@@ -1,9 +1,11 @@
 package modals;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 
+@Log4j2
 public abstract class BaseModal extends BasePage {
 
     protected static final By SAVE_BUTTON_LOCATOR =
@@ -20,6 +22,7 @@ public abstract class BaseModal extends BasePage {
 
 
     public void clickSave() {
+        log.info("Click Save");
         driver.findElement(SAVE_BUTTON_LOCATOR).click();
     }
 

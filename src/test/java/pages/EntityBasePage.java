@@ -11,11 +11,8 @@ import java.util.List;
 public abstract class EntityBasePage extends HomePage {
 
     protected final static By NEW_BUTTON = By.cssSelector("div.active a[title='New']");
-    private static final By TABLE_LOCATOR = By.cssSelector("table[role='grid']");
-    private static final By ENTITY_LINKS_LOCATOR =
-            By.cssSelector("table[role='grid'] a[data-refid='recordId']");
-    private final static By ALERT_MESSAGE_LOCATOR = By.cssSelector("div[role='alertdialog']");
-    private final static String CLOSE_TAB_BUTTON_LOCATOR = "button[title= 'Close %s']";
+    private final static By ALERT_MESSAGE_LOCATOR = By.cssSelector(
+            "div[role='alertdialog']");
 
     public EntityBasePage(WebDriver driver) {
         super(driver);
@@ -28,17 +25,8 @@ public abstract class EntityBasePage extends HomePage {
     }
 
     public void clickNewButton() {
+        log.info("Click New");
         driver.findElement(NEW_BUTTON).click();
-    }
-
-    public void openEntityByName(String entityName) {
-        List<WebElement> allLinks = getAllEntitiesList();
-        allLinks.stream().filter(p->p.getText().equals(entityName))
-                .findFirst().get().click();
-    }
-
-    List<WebElement> getAllEntitiesList() {
-        return driver.findElements(ENTITY_LINKS_LOCATOR);
     }
 
     public String getAlertMessage() {
@@ -47,8 +35,8 @@ public abstract class EntityBasePage extends HomePage {
     }
 
     public void closeAlert() {
+        log.info("Click Alert window");
         driver.findElement(ALERT_MESSAGE_LOCATOR).click();
         waitForElementInvisible(ALERT_MESSAGE_LOCATOR);
-        log.info("Alert invisible");
     }
 }

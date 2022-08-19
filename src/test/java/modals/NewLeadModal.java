@@ -3,6 +3,7 @@ package modals;
 
 import Utils.Address;
 import enums.*;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import elements.LightningCheckbox;
 import elements.LightningCombobox;
@@ -10,7 +11,7 @@ import elements.LightningInput;
 import elements.LightningTextArea;
 import models.Lead;
 
-
+@Log4j2
 public class NewLeadModal extends BaseModal {
 
     public NewLeadModal(WebDriver driver) {
@@ -19,10 +20,12 @@ public class NewLeadModal extends BaseModal {
 
     public void clickSave() {
         waitForElementClickable(SAVE_BUTTON_LOCATOR);
+        log.info("Click Save");
         driver.findElement(SAVE_BUTTON_LOCATOR).click();
     }
 
     public void fillForm(Lead inputLead) {
+        log.info("Fill the form");
         new LightningCombobox(driver, "Lead Status").
                 selectByVisibleText(inputLead.getLeadStatus().map(LeadStatus::getName).orElse(null));
         new LightningCombobox(driver, "Salutation").

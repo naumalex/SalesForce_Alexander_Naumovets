@@ -1,9 +1,11 @@
 package elements;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+@Log4j2
 public class LightningCheckbox extends BaseElement {
 
     private static final String CHECKBOX_LOCATOR =
@@ -19,7 +21,9 @@ public class LightningCheckbox extends BaseElement {
         WebElement checkbox = driver.findElement(By
                 .xpath(String.format(CHECKBOX_LOCATOR, label, label)));
         if (!(checkbox.isSelected() == value)) {
+            log.debug(String.format("Scroll to checkbox %s", label));
             scrollIntoView(checkbox);
+            log.debug(String.format("Click checkbox %s", label));
             checkbox.click();
         }
     }

@@ -2,6 +2,7 @@ package modals;
 
 import elements.*;
 import elements.SearchableDropDown.SearchableDropDownAccount;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import Utils.Address;
 
@@ -9,6 +10,7 @@ import enums.AccountType;
 import enums.Industry;
 import models.Account;
 
+@Log4j2
 public class NewAccountModal extends BaseModal {
 
     public NewAccountModal(WebDriver driver) {
@@ -16,6 +18,7 @@ public class NewAccountModal extends BaseModal {
     }
 
     public void fillForm(Account inputAccount) {
+        log.info("Fill Account form");
         new LightningInput(driver, "Account Name")
                 .setValue(inputAccount.getAccountName());
         new SearchableDropDownAccount(driver, "Parent Account").
@@ -55,6 +58,7 @@ public class NewAccountModal extends BaseModal {
                 .setValue(inputAccount.isCopyBillingAddressToShippingAddress());
     }
     public void clickSave() {
+        log.info("Click Save");
         driver.findElement(SAVE_BUTTON_LOCATOR).click();
     }
 }
