@@ -13,7 +13,6 @@ public class AccountsPage extends EntityBasePage{
 
     @Override
     public void waitForPageLoaded() {
-      //  waitForPageLoaded("Accounts");
         waitForElementClickable(TABLE_LOCATOR);
     }
 }
