@@ -1,8 +1,8 @@
-package pages.Utils;
+package Utils;
 
 import com.github.javafaker.Faker;
-import pages.enums.*;
-import pages.models.Lead;
+import enums.*;
+import models.Lead;
 
 public class LeadFactory {
     public static Lead getMandatoryInfoOnlyLead() {
@@ -30,11 +30,9 @@ public class LeadFactory {
                 .setNoOfEmployees(faker.numerify("###"))
                 .setLeadSource(LeadSource.TRADE_SHOW)
                 .setRating(Rating.COLD)
-                .setStreet(faker.address().streetAddress())
-                .setCity(faker.address().city())
-                .setStateProvince(faker.address().state())
-                .setZipPostalCode(faker.address().zipCode())
-                .setCountry(faker.address().country())
+                .setAddress(new Address(faker.address().streetAddress(),
+                        faker.address().city(), faker.address().state(),
+                        faker.address().zipCode(), faker.address().country()))
                 .setIsFollowUp(true)
                 .setAnnualRevenue(faker.numerify("$#,###"))
                 .build();

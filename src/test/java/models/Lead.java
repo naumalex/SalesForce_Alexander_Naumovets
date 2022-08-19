@@ -1,9 +1,10 @@
-package pages.models;
+package models;
 
+import Utils.Address;
+import enums.*;
 import lombok.Builder;
 import lombok.Data;
-import pages.Utils.Utils;
-import pages.enums.*;
+import Utils.StringUtils;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,29 +12,31 @@ import java.util.Optional;
 @Builder(setterPrefix = "set")
 
 public class Lead {
-    private  LeadStatus leadStatus;
-    private  Salutation salutation;
+    private LeadStatus leadStatus;
+    private Salutation salutation;
     private  String firstName;
     private  String lastName;
     private  String phone;
     private  String company;
     private  String email;
     private  String title;
-    private  Rating rating;
+    private Rating rating;
     private  String website;
     private  boolean isFollowUp;
     private  String noOfEmployees;
-    private  Industry industry;
-    private  LeadSource leadSource;
+    private Industry industry;
+    private LeadSource leadSource;
     private  String annualRevenue;
-    private  String street;
+    /*private  String street;
     private  String city;
     private  String stateProvince;
     private  String zipPostalCode;
-    private  String country;
+    private  String country;*/
     private  String description;
     private  String fullName;
-    private  String fullAddress;
+    //private  String fullAddress;
+    @Builder.Default
+    private Address address = new Address();
 
     public Optional<Salutation> getSalutation() {
         return Optional.ofNullable(salutation);
@@ -56,13 +59,13 @@ public class Lead {
     }
     public String getFullName() {
         return Optional.ofNullable(fullName).orElse(
-                Utils.buildFullName(getSalutation().map(Salutation::getName).orElse(null),
+                StringUtils.buildFullName(getSalutation().map(Salutation::getName).orElse(null),
                         firstName, lastName));
     }
-    public String getFullAddress() {
-        return Optional.ofNullable(fullAddress).orElse(
-                Utils.buildFullAddress(street, city, stateProvince, zipPostalCode, country));
-    }
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);/*.orElse(
+                StringUtils.buildFullAddress(street, city, stateProvince, zipPostalCode, country));
+   */ }
 
     @Override
     public boolean equals(Object o) {
@@ -72,7 +75,7 @@ public class Lead {
         return isFollowUp == lead.isFollowUp && Objects.equals(leadStatus, lead.leadStatus)   && Objects.equals(phone, lead.phone) && Objects.equals(company, lead.company) && Objects.equals(email, lead.email) && Objects.equals(title, lead.title) && Objects.equals(rating, lead.rating) && Objects.equals(website, lead.website) && Objects.equals(noOfEmployees, lead.noOfEmployees) && Objects.equals(industry, lead.industry)
                 && (getLeadSource().orElse(LeadSource.ADVERTISEMENT) ==
                 lead.getLeadSource().orElse(LeadSource.ADVERTISEMENT))
-                && Objects.equals(annualRevenue, lead.annualRevenue) && Objects.equals(description, lead.description) && Objects.equals(getFullName(), lead.getFullName()) && Objects.equals(getFullAddress(), lead.getFullAddress());
+                && Objects.equals(annualRevenue, lead.annualRevenue) && Objects.equals(description, lead.description) && Objects.equals(getFullName(), lead.getFullName()) && Objects.equals(getAddress(), lead.getAddress());
     }
 }
 

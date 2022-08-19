@@ -23,8 +23,10 @@ public class Account {
     private String AnnualRevenue;
     private String description;
     private boolean isCopyBillingAddressToShippingAddress;
-    private Address billingAddress;
-    private Address shippingAddress;
+    @Builder.Default
+    private Address billingAddress = new Address();
+    @Builder.Default
+    private Address shippingAddress = new Address();
 
     public Optional<AccountType> getAccountType() {
         return Optional.ofNullable(accountType);
@@ -37,9 +39,8 @@ public class Account {
         return Optional.ofNullable(billingAddress);
     }
     public Optional<Address> getShippingAddress() {
-        return Optional.ofNullable(billingAddress);
+        return Optional.ofNullable(shippingAddress);
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -47,9 +48,14 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return isCopyBillingAddressToShippingAddress == account.isCopyBillingAddressToShippingAddress && Objects.equals(phone, account.phone) && Objects.equals(fax, account.fax) && Objects.equals(accountName, account.accountName) && Objects.equals(parentAccount, account.parentAccount) && Objects.equals(website, account.website) && accountType == account.accountType && Objects.equals(employees, account.employees) && industry == account.industry && Objects.equals(AnnualRevenue, account.AnnualRevenue) && Objects.equals(description, account.description)
-                && Objects.equals(getBillingAddress().map(Address::getFullAddress).orElse(""),
-                account.getBillingAddress().map(Address::getFullAddress).orElse(""))
-                && Objects.equals(getShippingAddress().map(Address::getFullAddress).orElse(""),
-                account.getShippingAddress().map(Address::getFullAddress).orElse(""));
+                && Objects.equals(getBillingAddress(),
+                account.getBillingAddress())
+                && Objects.equals(getShippingAddress(),
+                account.getShippingAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phone, fax, accountName, parentAccount, website, accountType, employees, industry, AnnualRevenue, description, isCopyBillingAddressToShippingAddress, billingAddress, shippingAddress);
     }
 }

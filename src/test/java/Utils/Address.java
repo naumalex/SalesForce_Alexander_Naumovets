@@ -1,5 +1,6 @@
-package pages.Utils;
+package Utils;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Address {
@@ -9,6 +10,7 @@ public class Address {
     private String zipPostalCode;
     private String country;
     private String fullAddress;
+
     public String getStreet() {
         return street;
     }
@@ -29,6 +31,8 @@ public class Address {
         return country;
     }
 
+    public Address() {
+    }
     public Address(String street, String city, String stateProvince,
                    String zipPostalCode, String country) {
         this.street = street;
@@ -45,6 +49,7 @@ public class Address {
     public String getFullAddress() {
         return (fullAddress != null) ? fullAddress : buildFullAddress();
     }
+
     private String buildFullAddress() {
         final StringBuilder fullAddress = new StringBuilder();
         Optional.ofNullable(street).ifPresent(fullAddress::append);
@@ -55,4 +60,13 @@ public class Address {
         return fullAddress.toString().trim();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        //return Objects.equals(street, address.street) && Objects.equals(city, address.city) && Objects.equals(stateProvince, address.stateProvince) && Objects.equals(zipPostalCode, address.zipPostalCode) && Objects.equals(country, address.country) && Objects.equals(fullAddress, address.fullAddress);
+        return Objects.equals(getFullAddress(),
+                getFullAddress());
+    }
 }

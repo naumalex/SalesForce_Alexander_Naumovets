@@ -1,11 +1,15 @@
 package pages;
 
+import Utils.Address;
+import enums.Industry;
+import enums.LeadSource;
+import enums.LeadStatus;
+import enums.Rating;
 import org.openqa.selenium.WebDriver;
-import pages.elements.LightningCheckbox;
-import pages.elements.LightningFormattedLinkElement;
-import pages.elements.LightningFormattedElement;
-import pages.enums.*;
-import pages.models.Lead;
+import elements.LightningCheckbox;
+import elements.LightningFormattedLinkElement;
+import elements.LightningFormattedElement;
+import models.Lead;
 
 public class LeadDetailsPage extends HomePage {
     public LeadDetailsPage(WebDriver driver) {
@@ -46,7 +50,7 @@ public class LeadDetailsPage extends HomePage {
                 .setNoOfEmployees(noOfEmployees)
                 .setLeadSource(LeadSource.fromString(leadSource))
                 .setRating(Rating.fromString(rating))
-                .setFullAddress(fullAddress)
+                .setAddress(new Address(fullAddress))
                 .setIsFollowUp(isFollowUp)
                 .setAnnualRevenue(annualRevenue)
                 .build();
