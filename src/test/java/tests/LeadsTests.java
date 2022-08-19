@@ -5,9 +5,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LeadDetailsPage;
 import pages.LeadsPage;
-import pages.dataproviders.LeadDataProvider;
-import pages.modals.NewLeadModal;
-import pages.models.Lead;
+import dataproviders.LeadDataProvider;
+import modals.NewLeadModal;
+import models.Lead;
 
 public class LeadsTests extends BaseTest {
 
@@ -28,7 +28,7 @@ public class LeadsTests extends BaseTest {
         homePage.openTabByName("Leads");
         leadsPage.waitForPageLoaded();
         leadsPage.clickNewButton();
-        leadsPage.waitForTabLoaded("New Lead" );
+        //leadsPage.waitForTabLoaded("New Lead" );
         newLeadPage.fillForm(testLead);
         newLeadPage.clickSave();
         String actualAlertMessage = leadsPage.getAlertMessage();

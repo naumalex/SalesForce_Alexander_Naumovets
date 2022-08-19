@@ -1,9 +1,10 @@
-package pages.elements;
+package elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 public class LightningFormattedLinkElement extends BaseElement {
 
@@ -22,7 +23,14 @@ public class LightningFormattedLinkElement extends BaseElement {
             scrollIntoView(inputElement.get());
             return inputElement.get().getAttribute("innerText");
         }
-        else
+
+        inputElement = driver.findElements(By.xpath(locator))
+                    .stream().filter(s -> s.getTagName().equals("span")).findFirst();
+        if (inputElement.isPresent()) {
             return null;
+        }
+        else {
+            throw(new NoSuchElementException());
+        }
     }
 }

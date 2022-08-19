@@ -1,13 +1,14 @@
-package pages.modals;
+package modals;
 
 
+import Utils.Address;
+import enums.*;
 import org.openqa.selenium.WebDriver;
-import pages.elements.LightningCheckbox;
-import pages.elements.LightningCombobox;
-import pages.elements.LightningInput;
-import pages.elements.LightningTextArea;
-import pages.enums.*;
-import pages.models.Lead;
+import elements.LightningCheckbox;
+import elements.LightningCombobox;
+import elements.LightningInput;
+import elements.LightningTextArea;
+import models.Lead;
 
 
 public class NewLeadModal extends BaseModal {
@@ -42,10 +43,15 @@ public class NewLeadModal extends BaseModal {
         new LightningCombobox(driver, "Rating").
                     selectByVisibleText(inputLead.getRating().map(Rating::getName).orElse(null));
         new LightningInput(driver, "Annual Revenue").setValue(inputLead.getAnnualRevenue());
-        new LightningTextArea(driver, "Street").setValue(inputLead.getStreet());
-        new LightningInput(driver, "City").setValue(inputLead.getCity());
-        new LightningInput(driver, "State/Province").setValue(inputLead.getStateProvince());
-        new LightningInput(driver, "Zip/Postal Code").setValue(inputLead.getZipPostalCode());
-        new LightningInput(driver, "Country").setValue(inputLead.getCountry());
+        new LightningTextArea(driver, "Street").setValue(
+                inputLead.getAddress().map(Address::getStreet).orElse(null));
+        new LightningInput(driver, "City").setValue(
+                inputLead.getAddress().map(Address::getCity).orElse(null));
+        new LightningInput(driver, "State/Province").setValue(
+                inputLead.getAddress().map(Address::getStateProvince).orElse(null));
+        new LightningInput(driver, "Zip/Postal Code").setValue(
+                inputLead.getAddress().map(Address::getZipPostalCode).orElse(null));
+        new LightningInput(driver, "Country").setValue(
+                inputLead.getAddress().map(Address::getCountry).orElse(null));
     }
 }

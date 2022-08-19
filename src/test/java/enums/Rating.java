@@ -1,7 +1,6 @@
-package pages.enums;
+package enums;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Rating {
     NONE("--None--"), HOT("Hot"), WARM("Warm"), COLD("Cold");

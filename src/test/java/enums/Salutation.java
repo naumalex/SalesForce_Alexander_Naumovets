@@ -1,7 +1,6 @@
-package pages.enums;
+package enums;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Salutation {
     MR("Mr."), MS("Ms."), MRS("Mrs."), DR("Dr."), PROF("Prof.");

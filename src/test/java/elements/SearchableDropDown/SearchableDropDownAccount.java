@@ -1,29 +1,36 @@
-package pages.elements;
+package elements.SearchableDropDown;
 
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.Optional;
 
 @Log4j2
-public class LightningSearchableDropDown extends BaseElement {
+public class SearchableDropDownAccount extends BaseSearchableDropDown {
 
-    private final String DROPDOWN_LOCATOR =
+private final String DROPDOWN_ELEMENT_XPATH_EXPRESSION =
             "//label/span[text() = '%s']/parent::label//following-sibling::div//input";
-   private final String DROPDOWN_ITEMS_LOCATOR =
+   private final String DROPDOWN_ITEMS_XPATH_EXPRESSION =
            "//label/span[text() = '%s']/parent::label//following-sibling::div//div[@role='listbox']//li//mark";
 
-    public LightningSearchableDropDown(WebDriver driver, String label) {
+
+    public SearchableDropDownAccount(WebDriver driver, String label) {
         super(driver, label);
     }
 
-    public List<WebElement> getItems() {
+    @Override
+    protected String getDropDownElementXpathExpression() {
+        return DROPDOWN_ELEMENT_XPATH_EXPRESSION;
+    }
+
+    @Override
+    protected String getDropDownItemsXpathExpression() {
+        return DROPDOWN_ITEMS_XPATH_EXPRESSION;
+    }
+/*    public List<WebElement> getItems() {
         By locator = By.xpath(String.format(DROPDOWN_ITEMS_LOCATOR, label));
         wait.waitForListLoaded(locator);
         log.info(driver.findElements(locator).size());
+        driver.findElements(locator).stream().map(WebElement::getText).forEach(log::info);
+        driver.findElements(By.xpath(String.format(DROPDOWN_ITEMS_LOCATOR + "/parent::*", label))).stream().map(WebElement::getText).forEach(log::info);
         return driver.findElements(locator);
     }
 
@@ -39,4 +46,6 @@ public class LightningSearchableDropDown extends BaseElement {
         options.ifPresent(this::scrollIntoView);
         options.ifPresent(WebElement::click);
     }
+*/
 }
+

@@ -1,9 +1,9 @@
-package pages.elements;
+package elements;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pages.Utils.WaitUtils;
+import Utils.WaitUtils;
 
 public class BaseElement {
     protected WebDriver driver;

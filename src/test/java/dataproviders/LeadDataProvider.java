@@ -1,8 +1,7 @@
-package pages.dataproviders;
+package dataproviders;
 
-import com.github.javafaker.Faker;
 import org.testng.annotations.DataProvider;
-import pages.Utils.LeadFactory;
+import Utils.LeadFactory;
 
 public class LeadDataProvider {
     @DataProvider(name = "leadDataProvider")

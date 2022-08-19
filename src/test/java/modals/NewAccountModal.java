@@ -1,11 +1,13 @@
-package pages.modals;
+package modals;
 
+import elements.*;
+import elements.SearchableDropDown.SearchableDropDownAccount;
 import org.openqa.selenium.WebDriver;
-import pages.Utils.Address;
-import pages.elements.*;
-import pages.enums.AccountType;
-import pages.enums.Industry;
-import pages.models.Account;
+import Utils.Address;
+
+import enums.AccountType;
+import enums.Industry;
+import models.Account;
 
 public class NewAccountModal extends BaseModal {
 
@@ -16,7 +18,7 @@ public class NewAccountModal extends BaseModal {
     public void fillForm(Account inputAccount) {
         new LightningInput(driver, "Account Name")
                 .setValue(inputAccount.getAccountName());
-        new LightningSearchableDropDown(driver, "Parent Account").
+        new SearchableDropDownAccount(driver, "Parent Account").
                 setValue(inputAccount.getParentAccount());
         new LightningInput(driver, "Phone")
                 .setValue(inputAccount.getPhone());

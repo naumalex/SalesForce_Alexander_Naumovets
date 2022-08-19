@@ -5,9 +5,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.AccountDetailsPage;
 import pages.AccountsPage;
-import pages.dataproviders.AccountDataProvider;
-import pages.modals.NewAccountModal;
-import pages.models.Account;
+import dataproviders.AccountDataProvider;
+import modals.NewAccountModal;
+import models.Account;
 
 public class AccountsTests extends BaseTest {
 

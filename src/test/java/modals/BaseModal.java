@@ -1,4 +1,4 @@
-package pages.modals;
+package modals;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +19,7 @@ public abstract class BaseModal extends BasePage {
     }
 
 
-    public void clickSaveButton() {
+    public void clickSave() {
         driver.findElement(SAVE_BUTTON_LOCATOR).click();
     }
 

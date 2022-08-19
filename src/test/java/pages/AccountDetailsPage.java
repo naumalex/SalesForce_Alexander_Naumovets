@@ -1,12 +1,13 @@
 package pages;
 
+import enums.AccountType;
+import enums.Industry;
 import org.openqa.selenium.WebDriver;
-import pages.Utils.Address;
-import pages.elements.LightningCheckbox;
-import pages.elements.LightningFormattedElement;
-import pages.elements.LightningFormattedLinkElement;
-import pages.enums.*;
-import pages.models.Account;
+import Utils.Address;
+import elements.LightningCheckbox;
+import elements.LightningFormattedElement;
+import elements.LightningFormattedLinkElement;
+import models.Account;
 
 public class AccountDetailsPage extends HomePage{
 

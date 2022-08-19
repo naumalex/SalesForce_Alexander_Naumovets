@@ -1,8 +1,7 @@
-package pages.dataproviders;
+package dataproviders;
 
 import org.testng.annotations.DataProvider;
-import pages.Utils.AccountFactory;
-import pages.Utils.LeadFactory;
+import Utils.AccountFactory;
 
 public class AccountDataProvider {
     @DataProvider(name = "accountDataProvider")

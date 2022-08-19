@@ -1,6 +1,7 @@
  package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,8 +13,8 @@ import pages.*;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
+@Log4j2
 public class BaseTest {
-   // protected final static String DEFAULT_USER_NAME = "naum_1979_alex-1ne0@force.com";
     protected final static String DEFAULT_USER_NAME = "naum1979alex-8hvs@force.com";
     protected final static String DEFAULT_PASSWORD = "Password1*";
 
@@ -38,13 +39,16 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void logOutAndClearCookies() {
+    public void logOut() {
         homePage.logout();
         loginPage.waitForPageLoaded();
-        driver.manage().deleteAllCookies();
-        ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
-        ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
-    }
+        try {
+            Thread.sleep(5000);
+        }
+        catch (InterruptedException exc)
+        {
+            log.info("Interrupted Exception occurred during sleep");}
+      }
     @AfterClass(alwaysRun = true)
     public void quitDriver() {
         driver.quit();
