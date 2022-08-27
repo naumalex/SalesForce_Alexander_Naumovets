@@ -10,7 +10,7 @@ public enum AccountType {
     PROSPECT("Prospect"), RESELLER("Reseller"),
     OTHER("Other");
 
-    private String name;
+    private final String name;
 
     AccountType(String name) {
         this.name = name;

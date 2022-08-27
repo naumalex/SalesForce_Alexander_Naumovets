@@ -1,6 +1,5 @@
 package dataproviders;
 
-import Utils.AccountFactory;
 import Utils.ContactFactory;
 import org.testng.annotations.DataProvider;
 

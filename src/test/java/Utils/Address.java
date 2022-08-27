@@ -64,8 +64,6 @@ public class Address {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        //return Objects.equals(street, address.street) && Objects.equals(city, address.city) && Objects.equals(stateProvince, address.stateProvince) && Objects.equals(zipPostalCode, address.zipPostalCode) && Objects.equals(country, address.country) && Objects.equals(fullAddress, address.fullAddress);
         return Objects.equals(getFullAddress(),
                 getFullAddress());
     }

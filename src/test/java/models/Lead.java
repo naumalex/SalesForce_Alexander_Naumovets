@@ -27,14 +27,9 @@ public class Lead {
     private Industry industry;
     private LeadSource leadSource;
     private  String annualRevenue;
-    /*private  String street;
-    private  String city;
-    private  String stateProvince;
-    private  String zipPostalCode;
-    private  String country;*/
     private  String description;
     private  String fullName;
-    //private  String fullAddress;
+
     @Builder.Default
     private Address address = new Address();
 

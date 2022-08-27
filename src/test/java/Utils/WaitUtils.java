@@ -18,7 +18,6 @@ public class WaitUtils {
 
     public void waitForListLoaded(By locator) {
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(locator,0));
-        //wait.until(driver -> !driver.findElement(locator).getText().equals(""));
     }
 
     public void waitForElementClickable(By locator) {
